@@ -1,0 +1,11 @@
+{
+  "databaseConfig": {
+    "username": "local_user",
+    "password": "1234",
+    "database": "sofs_db",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "dialect": "postgres",
+    "logging": false
+  }
+}
