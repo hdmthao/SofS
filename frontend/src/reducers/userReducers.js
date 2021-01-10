@@ -18,9 +18,9 @@ import {
   USER_SIGN_IN_REQUEST,
   USER_SIGN_IN_SUCCESS,
   USER_SIGN_OUT,
-  // USER_TOP_SELLERS_LIST_FAIL,
-  // USER_TOP_SELLERS_LIST_REQUEST,
-  // USER_TOP_SELLERS_LIST_SUCCESS,
+  USER_TOP_SELLERS_LIST_FAIL,
+  USER_TOP_SELLERS_LIST_REQUEST,
+  USER_TOP_SELLERS_LIST_SUCCESS,
   // USER_UPDATE_FAIL,
   // USER_UPDATE_PROFILE_FAIL,
   // USER_UPDATE_PROFILE_REQUEST,
@@ -127,18 +127,19 @@ export const userSignInReducer = (state = {}, action) => {
 //       return state;
 //   }
 // };
-// export const userTopSellerListReducer = (state = { loading: true }, action) => {
-//   switch (action.type) {
-//     case USER_TOP_SELLERS_LIST_REQUEST:
-//       return { loading: true };
-//     case USER_TOP_SELLERS_LIST_SUCCESS:
-//       return { loading: false, users: action.payload };
-//     case USER_TOP_SELLERS_LIST_FAIL:
-//       return { loading: false, error: action.payload };
-//     default:
-//       return state;
-//   }
-// };
+
+export const userTopSellerListReducer = (state = { loading: true }, action) => {
+  switch (action.type) {
+    case USER_TOP_SELLERS_LIST_REQUEST:
+      return { loading: true };
+    case USER_TOP_SELLERS_LIST_SUCCESS:
+      return { loading: false, users: action.payload };
+    case USER_TOP_SELLERS_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
 
 // export const userAddressMapReducer = (state = {}, action) => {
 //   switch (action.type) {

@@ -10,7 +10,7 @@ import {
   USER_SIGN_IN_FAIL,
   USER_SIGN_IN_REQUEST,
   USER_SIGN_IN_SUCCESS,
-  // USER_SIGN_OUT,
+  USER_SIGN_OUT,
   // USER_UPDATE_PROFILE_FAIL,
   // USER_UPDATE_PROFILE_REQUEST,
   // USER_UPDATE_PROFILE_SUCCESS,
@@ -22,9 +22,9 @@ import {
   // USER_DELETE_FAIL,
   // USER_UPDATE_SUCCESS,
   // USER_UPDATE_FAIL,
-  // USER_TOPSELLERS_LIST_REQUEST,
-  // USER_TOPSELLERS_LIST_SUCCESS,
-  // USER_TOPSELLERS_LIST_FAIL,
+  USER_TOP_SELLERS_LIST_REQUEST,
+  USER_TOP_SELLERS_LIST_SUCCESS,
+  USER_TOP_SELLERS_LIST_FAIL,
 } from '../constants/userConstants';
 
 Axios.defaults.baseURL = BASE_URL;
@@ -37,15 +37,15 @@ export const register = (name, email, password) => async (dispatch) => {
       email,
       password,
     });
-    dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-    dispatch({ type: USER_SIGN_IN_SUCCESS, payload: data });
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    dispatch({ type: USER_REGISTER_SUCCESS, payload: data.response });
+    dispatch({ type: USER_SIGN_IN_SUCCESS, payload: data.response });
+    localStorage.setItem('userInfo', JSON.stringify(data.response));
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
+        error.response && error.response.data.error
+          ? error.response.data.error.message
           : error.message,
     });
   }
@@ -55,27 +55,27 @@ export const signIn = (email, password) => async (dispatch) => {
   dispatch({ type: USER_SIGN_IN_REQUEST, payload: { email, password } });
   try {
     const { data } = await Axios.post('/api/sign-in', { email, password });
-    dispatch({ type: USER_SIGN_IN_SUCCESS, payload: data });
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    dispatch({ type: USER_SIGN_IN_SUCCESS, payload: data.response });
+    localStorage.setItem('userInfo', JSON.stringify(data.response));
   } catch (error) {
-    console.log(error);
     dispatch({
       type: USER_SIGN_IN_FAIL,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
+        error.response && error.response.data.error
+          ? error.response.data.error.message
           : error.message,
     });
   }
 };
 
-// export const signout = () => (dispatch) => {
-//   localStorage.removeItem('userInfo');
-//   localStorage.removeItem('cartItems');
-//   localStorage.removeItem('shippingAddress');
-//   dispatch({ type: USER_SIGNOUT });
-//   document.location.href = '/signin';
-// };
+export const signOut = () => (dispatch) => {
+  localStorage.removeItem('userInfo');
+  localStorage.removeItem('cartItems');
+  localStorage.removeItem('shippingAddress');
+  dispatch({ type: USER_SIGN_OUT });
+  document.location.href = '/sign-in';
+};
+
 // export const detailsUser = (userId) => async (dispatch, getState) => {
 //   dispatch({ type: USER_DETAILS_REQUEST, payload: userId });
 //   const {
@@ -94,6 +94,7 @@ export const signIn = (email, password) => async (dispatch) => {
 //     dispatch({ type: USER_DETAILS_FAIL, payload: message });
 //   }
 // };
+
 // export const updateUserProfile = (user) => async (dispatch, getState) => {
 //   dispatch({ type: USER_UPDATE_PROFILE_REQUEST, payload: user });
 //   const {
@@ -170,16 +171,17 @@ export const signIn = (email, password) => async (dispatch) => {
 //     dispatch({ type: USER_DELETE_FAIL, payload: message });
 //   }
 // };
-// export const listTopSellers = () => async (dispatch) => {
-//   dispatch({ type: USER_TOPSELLERS_LIST_REQUEST });
-//   try {
-//     const { data } = await Axios.get('/api/users/top-sellers');
-//     dispatch({ type: USER_TOPSELLERS_LIST_SUCCESS, payload: data });
-//   } catch (error) {
-//     const message =
-//       error.response && error.response.data.message
-//         ? error.response.data.message
-//         : error.message;
-//     dispatch({ type: USER_TOPSELLERS_LIST_FAIL, payload: message });
-//   }
-// };
+
+export const listTopSellers = () => async (dispatch) => {
+  dispatch({ type: USER_TOP_SELLERS_LIST_REQUEST });
+  try {
+    const { data } = await Axios.get('/api/top-sellers?limit=4');
+    dispatch({ type: USER_TOP_SELLERS_LIST_SUCCESS, payload: data.response.topSellers });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.error
+        ? error.response.data.error.message
+        : error.message;
+    dispatch({ type: USER_TOP_SELLERS_LIST_FAIL, payload: message });
+  }
+};

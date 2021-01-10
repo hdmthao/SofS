@@ -6,7 +6,7 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 // import { cartReducer } from './reducers/cartReducers';
-// import {
+import {
 //   orderCreateReducer,
 //   orderDeleteReducer,
 //   orderDeliverReducer,
@@ -16,14 +16,14 @@ import thunk from 'redux-thunk';
 //   orderPayReducer,
 // } from './reducers/orderReducers';
 // import {
-//   productCategoryListReducer,
+  productCategoryListReducer,
 //   productCreateReducer,
 //   productDeleteReducer,
 //   productDetailsReducer,
-//   productListReducer,
+  productListReducer,
 //   productReviewCreateReducer,
 //   productUpdateReducer,
-// } from './reducers/productReducers';
+} from './reducers/productReducers';
 import {
 // userAddressMapReducer,
 // userDeleteReducer,
@@ -31,7 +31,7 @@ import {
 // userListReducer,
   userRegisterReducer,
   userSignInReducer,
-// userTopSellerListReducer,
+  userTopSellerListReducer,
 // userUpdateProfileReducer,
 // userUpdateReducer,
 } from './reducers/userReducers';
@@ -53,7 +53,7 @@ const initialState = {
   },
 };
 const reducer = combineReducers({
-//   productList: productListReducer,
+  productList: productListReducer,
 //   productDetails: productDetailsReducer,
 //   cart: cartReducer,
   userSignIn: userSignInReducer,
@@ -73,8 +73,8 @@ const reducer = combineReducers({
 //   orderDeliver: orderDeliverReducer,
 //   userList: userListReducer,
 //   userDelete: userDeleteReducer,
-//   userTopSellersList: userTopSellerListReducer,
-//   productCategoryList: productCategoryListReducer,
+  userTopSellersList: userTopSellerListReducer,
+  productCategoryList: productCategoryListReducer,
 //   productReviewCreate: productReviewCreateReducer,
 //   userAddressMap: userAddressMapReducer,
 });

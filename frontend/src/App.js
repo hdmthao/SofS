@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
-// import { signout } from './actions/userActions';
+import { signOut } from './actions/userActions';
 // import AdminRoute from './components/AdminRoute';
 // import PrivateRoute from './components/PrivateRoute';
 // import CartScreen from './screens/CartScreen';
@@ -22,9 +22,9 @@ import SignInScreen from './screens/SignInScreen';
 // import UserEditScreen from './screens/UserEditScreen';
 // import SellerRoute from './components/SellerRoute';
 // import SellerScreen from './screens/SellerScreen';
-// import SearchBox from './components/SearchBox';
-// import SearchScreen from './screens/SearchScreen';
-// import { listProductCategories } from './actions/productActions';
+import SearchBox from './components/SearchBox';
+import SearchScreen from './screens/SearchScreen';
+import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 // import MapScreen from './screens/MapScreen';
@@ -36,19 +36,19 @@ function App() {
   const userSignIn = useSelector((state) => state.userSignIn);
   const { userInfo } = userSignIn;
   const dispatch = useDispatch();
-  // const signOutHandler = () => {
-  //   dispatch(signout());
-  // };
+  const signOutHandler = () => {
+    dispatch(signOut());
+  };
 
-  // const productCategoryList = useSelector((state) => state.productCategoryList);
-  // const {
-  //   loading: loadingCategories,
-  //   error: errorCategories,
-  //   categories,
-  // } = productCategoryList;
-  // useEffect(() => {
-  //   dispatch(listProductCategories());
-  // }, [dispatch]);
+  const productCategoryList = useSelector((state) => state.productCategoryList);
+  const {
+    loading: loadingCategories,
+    error: errorCategories,
+    categories,
+  } = productCategoryList;
+  useEffect(() => {
+    dispatch(listProductCategories());
+  }, [dispatch]);
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -62,14 +62,14 @@ function App() {
               <i className="fa fa-bars"></i>
             </button>
             <Link className="brand" to="/">
-              amazona
+              SofS
             </Link>
           </div>
           <div>
             <Route
-              // render={({ history }) => (
-              //   // <SearchBox history={history}></SearchBox>
-              // )}
+              render={({ history }) => (
+                <SearchBox history={history}></SearchBox>
+              )}
             ></Route>
           </div>
           <div>
@@ -92,16 +92,16 @@ function App() {
                     <Link to="/orderhistory">Order History</Link>
                   </li>
                   <li>
-                    {/* <Link to="#signout" onClick={signoutHandler}>
+                    <Link to="#signout" onClick={signOutHandler}>
                       Sign Out
-                    </Link> */}
+                    </Link>
                   </li>
                 </ul>
               </div>
             ) : (
               <Link to="/sign-in">Sign In</Link>
             )}
-            {userInfo && userInfo.isSeller && (
+            {userInfo && userInfo.type === 'seller' && (
               <div className="dropdown">
                 <Link to="#admin">
                   Seller <i className="fa fa-caret-down"></i>
@@ -116,7 +116,7 @@ function App() {
                 </ul>
               </div>
             )}
-            {userInfo && userInfo.isAdmin && (
+            {userInfo && userInfo.type === 'admin' && (
               <div className="dropdown">
                 <Link to="#admin">
                   Admin <i className="fa fa-caret-down"></i>
@@ -151,22 +151,22 @@ function App() {
                 <i className="fa fa-close"></i>
               </button>
             </li>
-            {/* {loadingCategories ? (
+            {loadingCategories ? (
               <LoadingBox></LoadingBox>
             ) : errorCategories ? (
               <MessageBox variant="danger">{errorCategories}</MessageBox>
             ) : (
               categories.map((c) => (
-                <li key={c}>
+                <li key={c.id}>
                   <Link
-                    to={`/search/category/${c}`}
+                    to={`/search/category/${c.id}`}
                     onClick={() => setSidebarIsOpen(false)}
                   >
-                    {c}
+                    {c.name}
                   </Link>
                 </li>
               ))
-            )} */}
+            )}
           </ul>
         </aside>
         <main>
@@ -185,11 +185,11 @@ function App() {
           {/* <Route path="/placeorder" component={PlaceOrderScreen}></Route> */}
           {/* <Route path="/order/:id" component={OrderScreen}></Route> */}
           {/* <Route path="/orderhistory" component={OrderHistoryScreen}></Route> */}
-          {/* <Route
+          <Route
             path="/search/name/:name?"
-            // component={SearchScreen}
+            component={SearchScreen}
             exact
-          ></Route> */}
+          ></Route>
           {/* <Route
             path="/search/category/:category"
             component={SearchScreen}
