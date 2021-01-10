@@ -10,16 +10,16 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    return queryInterface.bulkInsert('Seller', [{
-      userId: 1,
-      name: 'Shoppe',
-      logo: '/images/logo1.png',
-      description: 'shoppe@description'
+    return queryInterface.bulkInsert('ProductReview', [{
+      productId: 1,
+      userId: 2,
+      comment: 'so good',
+      rating: 4
     }, {
-      userId: 4,
-      name: 'khoa"s tiki',
-      logo: '/images/logo2.jpg',
-      description: 'tiki@description'
+      productId: 1,
+      userId: 3,
+      comment: 'so bad',
+      rating: 2
     }]);
   },
 

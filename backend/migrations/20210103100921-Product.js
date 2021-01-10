@@ -29,6 +29,7 @@ module.exports = {
       },
       description: Sequelize.STRING,
       price: Sequelize.FLOAT,
+      countInStock: Sequelize.INTEGER,
       status: {
         type: Sequelize.BOOLEAN,
         defaultValue: true

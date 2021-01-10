@@ -1,24 +1,35 @@
 import { NotFoundError } from '../utils/errors/userFacingError';
-import { Product } from '../models';
+import { Product, ProductReview, sequelize } from '../models';
 import { logger } from '../config/winston';
 import { DatabaseError } from '../utils/errors/baseError';
 
 export default class ProductService {
   static async getProducts(params) {
-    const products = await Product.findAndCountAll({
+    console.log(params)
+    const products = await Product.findAll({
       where: {
-        Status: true
+        status: true
       },
       attributes: {
+        include: [
+          [sequelize.fn('COUNT', sequelize.col('ProductReviews.id')), 'numReviews'],
+          [sequelize.fn('AVG', sequelize.col('ProductReviews.rating')), 'rating']
+        ],
         exclude: ['createAt', 'updateAt']
       },
+      include: [{
+        model: ProductReview,
+        attributes: []
+      }],
+      group: ['Product.id'],
       limit: params.limit,
-      offset: params.page * params.limit,
-      order: [['Name', 'ASC']]
+      offset: (params.page - 1) * params.limit,
+      order: [['name', 'ASC']],
+      subQuery: false
     });
+
     return {
-      totalProduct: products.count,
-      products: products.rows
+      products
     };
   }
 

@@ -2,9 +2,9 @@ import { Seller, SellerReview, sequelize } from '../models';
 
 export default class SellerService {
   static async getTopSeller(params) {
-    const topSeller = await Seller.findAll({
+    const topSellers = await Seller.findAll({
       where: {
-        status: true,
+        status: true
       },
       attributes: {
         include: [
@@ -25,7 +25,7 @@ export default class SellerService {
     });
 
     return {
-      topSeller
+      topSellers
     };
   }
 }

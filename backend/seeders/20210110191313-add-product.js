@@ -10,16 +10,14 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    return queryInterface.bulkInsert('Seller', [{
-      userId: 1,
-      name: 'Shoppe',
-      logo: '/images/logo1.png',
-      description: 'shoppe@description'
-    }, {
-      userId: 4,
-      name: 'khoa"s tiki',
-      logo: '/images/logo2.jpg',
-      description: 'tiki@description'
+    return queryInterface.bulkInsert('Product', [{
+      name: 'quần què',
+      image: '/images/quan_que.jpg',
+      brand: 'La Pie',
+      categoryId: 1,
+      description: 'Cái quần què nè',
+      price: 333,
+      countInStock: 69
     }]);
   },
 

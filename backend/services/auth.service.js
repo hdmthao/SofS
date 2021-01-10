@@ -54,7 +54,7 @@ export default class AuthService {
     });
 
     if (!user || !isAuthenticate(info.password, user.password)) {
-      throw new NotFoundError('Invalid email or password', 'not_found');
+      throw new NotFoundError('Wrong email or password', 'not_found');
     }
 
     if (user.status === false) {

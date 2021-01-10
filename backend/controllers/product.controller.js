@@ -13,16 +13,13 @@ export default class ProductController {
       params.name = req.query.name || '';
       params.categoryId = Number(req.query.categoryId) || null;
       params.sellerId = Number(req.query.sellerId) || null;
-      params.minPrice =
-      req.query.min && Number(req.query.min) > 0 ? Number(req.query.min) : 0;
-      params.maxPrice =
-      req.query.max && Number(req.query.max) > 0 ? Number(req.query.max) : 0;
-      params.rating =
-      req.query.rating && Number(req.query.rating) !== 0
+      params.minPrice = req.query.min && Number(req.query.min) > 0 ? Number(req.query.min) : 0;
+      params.maxPrice = req.query.max && Number(req.query.max) > 0 ? Number(req.query.max) : 0;
+      params.rating = req.query.rating && Number(req.query.rating) !== 0
         ? Number(req.query.rating)
         : 0;
 
-      const products = await ProductService.getProducts(req.params);
+      const products = await ProductService.getProducts(params);
 
       return responseSuccess(res, {
         success: true,
