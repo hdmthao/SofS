@@ -1,5 +1,4 @@
-'use strict';
-
+/* eslint-disable no-unused-vars */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     /**
@@ -11,19 +10,11 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   return queryInterface.bulkInsert('UserState', [{
-     state: 'ACTIVATE',
-     createdAt: new Date(),
-     updatedAt: new Date()
-   }, {
-     state: 'BLOCKED',
-     createdAt: new Date(),
-     updatedAt: new Date()
-   }, {
-     state: 'BANNED',
-     createdAt: new Date(),
-     updatedAt: new Date()
-   }])
+    return queryInterface.bulkInsert('Category', [{
+      name: 'Pants'
+    }, {
+      name: 'Shirts'
+    }]);
   },
 
   down: async (queryInterface, Sequelize) => {

@@ -2,9 +2,9 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const path = require('path');
 
 const models = require('./models');
-
 
 let logger = console;
 if (process.env.NODE_ENV === 'production') {
@@ -30,6 +30,9 @@ app.use(cookieParser());
 app.use(methodOverride('X-HTTP-Method-Override'));
 
 routes(app);
+
+const buildPath = path.join(__dirname, '../frontend', 'build');
+app.use(express.static(buildPath));
 
 // catch 404 and forward to error handler
 app.use((req, res) => {
