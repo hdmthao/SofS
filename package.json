@@ -1,0 +1,10 @@
+{
+  "name": "sofs",
+  "version": "1.0.0",
+  "dependencies": {},
+  "scripts": {
+    "build": "cd frontend && yarn install && yarn build",
+    "start": "cd frontend && yarn start"  
+  },
+  "devDependencies": {}
+}
