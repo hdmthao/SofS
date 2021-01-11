@@ -10,16 +10,20 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    sellerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     image: {
       type: DataTypes.STRING,
       allowNull: false
     },
     brand: {
       type: DataTypes.STRING
-    },
-    categoryId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
     },
     description: DataTypes.STRING,
     price: DataTypes.FLOAT,
@@ -42,7 +46,14 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Product.hasMany(models.ProductReview, {
-      foreignKey: 'productId'
+      foreignKey: 'productId',
+      as: 'reviews'
+    });
+
+    Product.belongsTo(models.Seller, {
+      foreignKey: 'sellerId',
+      targetKey: 'id',
+      as: 'seller'
     });
   };
 

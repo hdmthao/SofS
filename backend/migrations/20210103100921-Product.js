@@ -13,6 +13,12 @@ module.exports = {
         autoIncrement: true,
         allowNull: false
       },
+      categoryId: {
+        type: Sequelize.INTEGER
+      },
+      sellerId: {
+        type: Sequelize.INTEGER
+      },
       name: {
         type: Sequelize.STRING,
         allowNull: false
@@ -23,9 +29,6 @@ module.exports = {
       },
       brand: {
         type: Sequelize.STRING
-      },
-      categoryId: {
-        type: Sequelize.INTEGER
       },
       description: Sequelize.STRING,
       price: Sequelize.FLOAT,

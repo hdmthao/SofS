@@ -15,6 +15,7 @@ module.exports = {
       image: '/images/quan_que.jpg',
       brand: 'La Pie',
       categoryId: 1,
+      sellerId: 1,
       description: 'Cái quần què nè',
       price: 333,
       countInStock: 69

@@ -1,11 +1,10 @@
 import { NotFoundError } from '../utils/errors/userFacingError';
-import { Product, ProductReview, sequelize } from '../models';
+import { Product, ProductReview, SellerReview, User, Seller, sequelize } from '../models';
 import { logger } from '../config/winston';
 import { DatabaseError } from '../utils/errors/baseError';
 
 export default class ProductService {
   static async getProducts(params) {
-    console.log(params)
     const products = await Product.findAll({
       where: {
         status: true
@@ -41,11 +40,33 @@ export default class ProductService {
       },
       include: [{
         model: Seller,
+        as: 'seller',
         attributes: {
-          include: [[sequelize.fn('')]]
-        }
-      }],
-      raw: true
+          include: [
+            [sequelize.fn('COUNT', sequelize.col('SellerReviews.id')), 'numReviews'],
+            [sequelize.fn('SUM', sequelize.col('SellerReviews.rating')), 'rating']
+          ],
+          exclude: ['status', 'createdAt', 'updatedAt']
+        },
+        include: [{
+          attributes: ['id', 'rating'],
+          model: SellerReview
+        }],
+        group: ['seller.id'],
+        subQuery: false
+      }, {
+        model: ProductReview,
+        as: 'reviews',
+        attributes: {
+          exclude: ['userId', 'updatedAt'],
+        },
+        include: [{
+          model: User,
+          as: 'reviewer',
+          attributes: ['id', 'name'],
+        }],
+        raw: true
+      }]
     });
 
     if (!product) {

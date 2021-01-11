@@ -33,9 +33,14 @@ export default class ProductController {
 
   static async getProduct(req, res) {
     try {
-      Validator.validateParams(req.params, [['prodId', 'number']]);
+      const params = {
+        prodId: parseInt(req.params.prodId, 10)
+      };
 
-      const product = await ProductService.getProduct(req.params);
+      if (Number.isNaN(params.prodId)) {
+        throw new BadRequestError('Product Id must be a number', 'invalid_param');
+      }
+      const product = await ProductService.getProduct(params);
 
       return responseSuccess(res, {
         success: true,

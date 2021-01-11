@@ -19,7 +19,11 @@
   },
   "scripts": {
     "build": "cd frontend && npm install && npm run build",
-    "start": "cd frontend && npm run start"  
+    "start": "node --experimental-modules backend/bin/www"  
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "engines": {
+    "node": "12.9.0",
+    "npm": "6.10.0"
+  }
 }

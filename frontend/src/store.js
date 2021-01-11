@@ -19,9 +19,9 @@ import {
   productCategoryListReducer,
 //   productCreateReducer,
 //   productDeleteReducer,
-//   productDetailsReducer,
+  productDetailsReducer,
   productListReducer,
-//   productReviewCreateReducer,
+  productReviewCreateReducer,
 //   productUpdateReducer,
 } from './reducers/productReducers';
 import {
@@ -54,7 +54,7 @@ const initialState = {
 };
 const reducer = combineReducers({
   productList: productListReducer,
-//   productDetails: productDetailsReducer,
+  productDetails: productDetailsReducer,
 //   cart: cartReducer,
   userSignIn: userSignInReducer,
   userRegister: userRegisterReducer,
@@ -75,7 +75,7 @@ const reducer = combineReducers({
 //   userDelete: userDeleteReducer,
   userTopSellersList: userTopSellerListReducer,
   productCategoryList: productCategoryListReducer,
-//   productReviewCreate: productReviewCreateReducer,
+  productReviewCreate: productReviewCreateReducer,
 //   userAddressMap: userAddressMapReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
