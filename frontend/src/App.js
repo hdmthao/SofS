@@ -7,21 +7,21 @@ import PrivateRoute from './components/PrivateRoute';
 import CartScreen from './screens/CartScreen';
 import HomeScreen from './screens/HomeScreen';
 // import OrderHistoryScreen from './screens/OrderHistoryScreen';
-// import OrderScreen from './screens/OrderScreen';
+import OrderScreen from './screens/OrderScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
-// import ProductListScreen from './screens/ProductListScreen';
+import ProductListScreen from './screens/ProductListScreen';
 import ProductScreen from './screens/ProductScreen';
-// import ProfileScreen from './screens/ProfileScreen';
+import ProfileScreen from './screens/ProfileScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SignInScreen from './screens/SignInScreen';
-// import ProductEditScreen from './screens/ProductEditScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
 // import OrderListScreen from './screens/OrderListScreen';
 // import UserListScreen from './screens/UserListScreen';
 // import UserEditScreen from './screens/UserEditScreen';
-// import SellerRoute from './components/SellerRoute';
-// import SellerScreen from './screens/SellerScreen';
+import SellerRoute from './components/SellerRoute';
+import SellerScreen from './screens/SellerScreen';
 import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
 import { listProductCategories } from './actions/productActions';
@@ -101,17 +101,17 @@ function App() {
             ) : (
               <Link to="/sign-in">Sign In</Link>
             )}
-            {userInfo && userInfo.type === 'seller' && (
+            {userInfo && userInfo.userType === 'seller' && (
               <div className="dropdown">
                 <Link to="#admin">
                   Seller <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/productlist/seller">Products</Link>
+                    <Link to="/product-list/seller">Products</Link>
                   </li>
                   <li>
-                    <Link to="/orderlist/seller">Orders</Link>
+                    <Link to="/order-list/seller">Orders</Link>
                   </li>
                 </ul>
               </div>
@@ -170,47 +170,47 @@ function App() {
           </ul>
         </aside>
         <main>
-          {/* <Route path="/seller/:id" component={SellerScreen}></Route> */}
+          <Route path="/sellers/:id" component={SellerScreen}></Route>
           <Route path="/carts/:id?" component={CartScreen}></Route>
           <Route path="/products/:id" component={ProductScreen} exact></Route>
-          {/* <Route
-            path="/product/:id/edit"
+          <Route
+            path="/products/:id/edit"
             component={ProductEditScreen}
             exact
-          ></Route> */}
+          ></Route>
           <Route path="/sign-in" component={SignInScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
           <Route path="/shippings" component={ShippingAddressScreen}></Route>
           <Route path="/payments" component={PaymentMethodScreen}></Route>
           <Route path="/place-orders" component={PlaceOrderScreen}></Route>
-          {/* <Route path="/order/:id" component={OrderScreen}></Route> */}
+          <Route path="/orders/:id" component={OrderScreen}></Route>
           {/* <Route path="/orderhistory" component={OrderHistoryScreen}></Route> */}
           <Route
             path="/search/name/:name?"
             component={SearchScreen}
             exact
           ></Route>
-          {/* <Route
+          <Route
             path="/search/category/:category"
             component={SearchScreen}
             exact
-          ></Route> */}
-          {/* <Route
+          ></Route>
+          <Route
             path="/search/category/:category/name/:name"
             component={SearchScreen}
             exact
-          ></Route> */}
-          {/* <Route
+          ></Route>
+          <Route
             path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact
-          ></Route> */}
-          {/* <PrivateRoute
+          ></Route>
+          <PrivateRoute
             path="/profile"
             component={ProfileScreen}
-          ></PrivateRoute> */}
+          ></PrivateRoute>
           <PrivateRoute path="/map" component={MapScreen}></PrivateRoute>
-          {/* <AdminRoute
+         {/* <AdminRoute
             path="/productlist"
             component={ProductListScreen}
             exact
@@ -229,12 +229,12 @@ function App() {
           <AdminRoute
             path="/user/:id/edit"
             component={UserEditScreen}
-          ></AdminRoute>
-          <SellerRoute
-            path="/productlist/seller"
+          ></AdminRoute> */}
+           <SellerRoute
+            path="/product-list/seller"
             component={ProductListScreen}
           ></SellerRoute>
-          <SellerRoute
+          {/*<SellerRoute
             path="/orderlist/seller"
             component={OrderListScreen}
           ></SellerRoute> */}

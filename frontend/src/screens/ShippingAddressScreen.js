@@ -49,7 +49,7 @@ export default function ShippingAddressScreen(props) {
           lng: newLng,
         })
       );
-      props.history.push('/payment');
+      props.history.push('/payments');
     }
   };
   const chooseOnMap = () => {
