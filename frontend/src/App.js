@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import myLogo from './images/logo.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signOut } from './actions/userActions';
@@ -56,12 +57,13 @@ function App() {
           <div>
             <button
               type="button"
-              className="open-sidebar"
+              className="open-sidebar size-cart Header-item"
               onClick={() => setSidebarIsOpen(true)}
             >
               <i className="fa fa-bars"></i>
             </button>
-            <Link className="brand" to="/">
+            <Link className="brand mb-n1 mt-n1" to="/">
+              <img src={myLogo} className="logo"/>
               SofS
             </Link>
           </div>
@@ -74,7 +76,7 @@ function App() {
           </div>
           <div>
             <Link to="/carts">
-              Cart
+              <i className="fa fa-shopping-cart size-cart"></i>
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
               )}
@@ -99,7 +101,7 @@ function App() {
                 </ul>
               </div>
             ) : (
-              <Link to="/sign-in">Sign In</Link>
+              <Link className="size-cart border rounded-1 py-1" to="/sign-in">Sign In</Link>
             )}
             {userInfo && userInfo.type === 'seller' && (
               <div className="dropdown">

@@ -30,16 +30,15 @@ export default function SignInScreen(props) {
   }, [props.history, redirect, userInfo]);
 
   return (
-    <div>
-      <form className="form" onSubmit={submitHandler}>
-        <div>
-          <h1>Sign In</h1>
-        </div>
+    <div className="auth-form px-3">
+      <h1>Sign In</h1>
+      <form className="form auth-form-body mt-3 rounded-3" onSubmit={submitHandler}>
         {loading && <LoadingBox />}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
           <label htmlFor="email">Email address</label>
           <input
+            className="form-fill" 
             type="email"
             id="email"
             placeholder="Enter email"
@@ -50,6 +49,7 @@ export default function SignInScreen(props) {
         <div>
           <label htmlFor="password">Password</label>
           <input
+            className="form-fill" 
             type="password"
             id="password"
             placeholder="Enter password"
@@ -59,20 +59,20 @@ export default function SignInScreen(props) {
         </div>
         <div>
           <label />
-          <button className="primary" type="submit">
+          <button className="primary rounded-2" type="submit">
             Sign In
           </button>
         </div>
-        <div>
+      </form>
+      <div>
           <label />
-          <div>
-            New customer?&nbsp;
-            <Link to={`/register?redirect=${redirect}`}>
+          <div className="mt-3 login-callout">
+            New to SofS?&nbsp;
+            <Link className="active" to={`/register?redirect=${redirect}`}>
               Create your account
             </Link>
           </div>
         </div>
-      </form>
     </div>
   );
 }

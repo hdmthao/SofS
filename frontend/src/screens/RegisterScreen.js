@@ -34,10 +34,8 @@ export default function RegisterScreen(props) {
   }, [props.history, redirect, userInfo]);
   return (
     <div>
-      <form className="form" onSubmit={submitHandler}>
-        <div>
-          <h1>Create Account</h1>
-        </div>
+      <h1>Create Account</h1>
+      <form className="form auth-form-body mt-3 rounded-3" onSubmit={submitHandler}>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
@@ -90,7 +88,7 @@ export default function RegisterScreen(props) {
           <label />
           <div>
             Already have an account?{' '}
-            <Link to={`/sign-in?redirect=${redirect}`}>Sign-In</Link>
+            <Link to={`/sign-in?redirect=${redirect}`}>Sign In</Link>
           </div>
         </div>
       </form>
