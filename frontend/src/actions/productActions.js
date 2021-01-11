@@ -41,7 +41,7 @@ export const listProducts = ({
   });
   try {
     const { data } = await Axios.get(
-      `/api/products?page=${page}&sellerId=${sellerId}&name=${name}&categoryId=${categoryId}&min=${min}&max=${max}&rating=${rating}&order=${order}`
+      `/api/products?pageNumber=${page}&sellerId=${sellerId}&name=${name}&categoryId=${categoryId}&min=${min}&max=${max}&rating=${rating}&order=${order}`
     );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data.response });
   } catch (error) {
@@ -74,8 +74,8 @@ export const detailsProduct = (productId) => async (dispatch) => {
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
+        error.response && error.response.data.error
+          ? error.response.data.error.message
           : error.message,
     });
   }
@@ -83,7 +83,7 @@ export const detailsProduct = (productId) => async (dispatch) => {
 export const createProduct = () => async (dispatch, getState) => {
   dispatch({ type: PRODUCT_CREATE_REQUEST });
   const {
-    userSignin: { userInfo },
+    userSignIn: { userInfo },
   } = getState();
   try {
     const { data } = await Axios.post(
@@ -95,7 +95,7 @@ export const createProduct = () => async (dispatch, getState) => {
     );
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
-      payload: data.product,
+      payload: data.response.product,
     });
   } catch (error) {
     const message =
@@ -108,10 +108,10 @@ export const createProduct = () => async (dispatch, getState) => {
 export const updateProduct = (product) => async (dispatch, getState) => {
   dispatch({ type: PRODUCT_UPDATE_REQUEST, payload: product });
   const {
-    userSignin: { userInfo },
+    userSignIn: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.put(`/api/products/${product._id}`, product, {
+    const { data } = await Axios.put(`/api/products/${product.id}`, product, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });

@@ -9,20 +9,20 @@ import { cartReducer } from './reducers/cartReducers';
 import {
   orderCreateReducer,
 //   orderDeleteReducer,
-//   orderDeliverReducer,
-//   orderDetailsReducer,
+  orderDeliverReducer,
+  orderDetailsReducer,
 //   orderListReducer,
 //   orderMineListReducer,
-//   orderPayReducer,
+  orderPayReducer,
 } from './reducers/orderReducers';
 import {
   productCategoryListReducer,
-//   productCreateReducer,
-//   productDeleteReducer,
+  productCreateReducer,
+  productDeleteReducer,
   productDetailsReducer,
   productListReducer,
   productReviewCreateReducer,
-//   productUpdateReducer,
+  productUpdateReducer,
 } from './reducers/productReducers';
 import {
 userAddressMapReducer,
@@ -32,7 +32,7 @@ userAddressMapReducer,
   userRegisterReducer,
   userSignInReducer,
   userTopSellerListReducer,
-// userUpdateProfileReducer,
+  userUpdateProfileReducer,
 // userUpdateReducer,
 } from './reducers/userReducers';
 
@@ -59,18 +59,18 @@ const reducer = combineReducers({
   userSignIn: userSignInReducer,
   userRegister: userRegisterReducer,
   orderCreate: orderCreateReducer,
-//   orderDetails: orderDetailsReducer,
-//   orderPay: orderPayReducer,
+  orderDetails: orderDetailsReducer,
+  orderPay: orderPayReducer,
 //   orderMineList: orderMineListReducer,
 //   userDetails: userDetailsReducer,
-//   userUpdateProfile: userUpdateProfileReducer,
+  userUpdateProfile: userUpdateProfileReducer,
 //   userUpdate: userUpdateReducer,
-//   productCreate: productCreateReducer,
-//   productUpdate: productUpdateReducer,
-//   productDelete: productDeleteReducer,
+  productCreate: productCreateReducer,
+  productUpdate: productUpdateReducer,
+  productDelete: productDeleteReducer,
 //   orderList: orderListReducer,
 //   orderDelete: orderDeleteReducer,
-//   orderDeliver: orderDeliverReducer,
+  orderDeliver: orderDeliverReducer,
 //   userList: userListReducer,
 //   userDelete: userDeleteReducer,
   userTopSellersList: userTopSellerListReducer,
@@ -78,6 +78,7 @@ const reducer = combineReducers({
   productReviewCreate: productReviewCreateReducer,
   userAddressMap: userAddressMapReducer,
 });
+
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducer,

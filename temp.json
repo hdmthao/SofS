@@ -1,0 +1,68 @@
+{
+  "cartItems": [
+    {
+      "name": "quần què",
+      "image": "/images/quan_que.jpg",
+      "price": 333,
+      "countInStock": 69,
+      "product": 1,
+      "seller": {
+        "id": 1,
+        "userId": 1,
+        "name": "Shoppe",
+        "logo": "/images/logo1.png",
+        "description": "shoppe@description",
+        "sellerReviews": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "numReviews": "2",
+        "rating": "3.0000000000000000"
+      },
+      "qty": 1
+    }
+  ],
+  "shippingAddress": {
+    "fullName": "aka",
+    "address": "hcn",
+    "city": "ccc",
+    "postalCode": "cccc",
+    "country": "cccc"
+  },
+  "paymentMethod": "PayPal",
+  "itemsPrice": 333,
+  "shippingPrice": 0,
+  "taxPrice": 49.95,
+  "totalPrice": 382.95,
+  "orderItems": [
+    {
+      "name": "quần què",
+      "image": "/images/quan_que.jpg",
+      "price": 333,
+      "countInStock": 69,
+      "product": 1,
+      "seller": {
+        "id": 1,
+        "userId": 1,
+        "name": "Shoppe",
+        "logo": "/images/logo1.png",
+        "description": "shoppe@description",
+        "sellerReviews": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "numReviews": "2",
+        "rating": "3.0000000000000000"
+      },
+      "qty": 1
+    }
+  ]
+}
