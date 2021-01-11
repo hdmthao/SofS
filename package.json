@@ -23,7 +23,8 @@
   },
   "scripts": {
     "build": "cd frontend && npm install && npm run build",
-    "start": "nodemon --watch backend --exec node --experimental-modules backend/bin/www"
+    "dev": "nodemon --watch backend --exec node --experimental-modules backend/bin/www",
+    "start": "node --experimental-modules backend/bin/www"
   },
   "devDependencies": {
     "eslint": "^7.17.0",
