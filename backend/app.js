@@ -33,14 +33,9 @@ routes(app);
 
 const buildPath = path.join(__dirname, '../frontend', 'build');
 app.use(express.static(buildPath));
-
-// catch 404 and forward to error handler
-app.use((req, res) => {
-  res.status(404).send('Page not found');
-});
-
-// app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
-// );
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
+);
 
 // error handler
 // no stacktraces leaked to user unless in development environment

@@ -19,6 +19,15 @@ module.exports = {
       description: 'Cái quần què nè',
       price: 333,
       countInStock: 69
+    }, {
+      name: 'Bleu de Chanel',
+      image: 'images/bleu-de-chanel.jpg',
+      brand: 'Chanel',
+      categoryId: 2,
+      sellerId: 2,
+      description: 'Nước hoa nè',
+      price: 33333,
+      countInStock: 2
     }]);
   },
 

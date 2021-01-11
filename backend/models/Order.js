@@ -25,17 +25,23 @@ module.exports = (sequelize, DataTypes) => {
     paymentResultId: {
       type: DataTypes.INTEGER
     },
-    itemsPrice: DataTypes.INTEGER,
-    taxPrice: DataTypes.INTEGER,
-    shippingPrice: DataTypes.INTEGER,
-    totalPrice: DataTypes.INTEGER,
+    itemsPrice: DataTypes.FLOAT,
+    taxPrice: DataTypes.FLOAT,
+    shippingPrice: DataTypes.FLOAT,
+    totalPrice: DataTypes.FLOAT,
     isPaid: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
+    paidAt: {
+      type: DataTypes.DATE
+    },
     isDelivered: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false1
+      defaultValue: false
+    },
+    deliveredAt: {
+      type: DataTypes.DATE
     },
     status: {
       type: DataTypes.BOOLEAN,
@@ -44,6 +50,24 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     freezeTableName: true
   });
+
+  Order.associate = (models) => {
+    Order.belongsTo(models.ShippingAddress, {
+      foreignKey: 'shippingAddressId',
+      as: 'shippingAddress'
+    });
+
+    Order.belongsTo(models.User, {
+      foreignKey: 'buyerId',
+      as: 'user'
+    });
+
+    Order.hasMany(models.OrderDetail, {
+      targetKey: 'id',
+      foreignKey: 'orderId',
+      as: 'orderItems'
+    });
+  };
 
   return Order;
 };

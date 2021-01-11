@@ -14,6 +14,8 @@ module.exports = {
       name: 'Pants'
     }, {
       name: 'Shirts'
+    }, {
+      name: 'Perfume'
     }]);
   },
 

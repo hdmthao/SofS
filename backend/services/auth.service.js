@@ -1,4 +1,4 @@
-import { User, UserType } from '../models';
+import { User, UserType, Seller } from '../models';
 import { tokenGenerator } from '../utils/jwt';
 import { ConflictError, ForbiddenError, NotFoundError } from '../utils/errors/userFacingError';
 import { DatabaseError } from '../utils/errors/baseError';
@@ -45,7 +45,6 @@ export default class AuthService {
       },
       attributes: {
         exclude: ['createAt', 'updateAt'],
-        // include: [['UserType.type', 'userType']]
       },
       include: [{
         model: UserType,
@@ -60,11 +59,19 @@ export default class AuthService {
     if (user.status === false) {
       throw new ForbiddenError('User has been banned.', 'forbidden');
     }
-
+    let seller = null;
+    if (user.UserType.type === 'seller') {
+      seller = await Seller.findOne({
+        where: {
+          userId: user.id
+        }
+      });
+    }
     const tokenObject = {
       id: user.id,
-      userTypeId: user.userTypeId
+      userType: user.UserType.type
     };
+
     const token = await tokenGenerator(tokenObject);
     user.token = token;
     await user.save();
@@ -73,7 +80,8 @@ export default class AuthService {
       userType: user.UserType.type,
       name: user.name,
       email: user.email,
-      token: user.token
+      token: user.token,
+      seller
     };
   }
 }

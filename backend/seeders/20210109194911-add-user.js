@@ -35,6 +35,11 @@ module.exports = {
       email: 'san_buyer@gmail.com',
       password: '$2b$08$k/8xVEN3MbnRQh9goCNf1.H75FRdSiDfnX/L9JVTMU0GthjZCKuJi',
       name: 'san_buyer'
+    }, {
+      userTypeId: 1,
+      email: 'admin@gmail.com',
+      password: '$2b$08$k/8xVEN3MbnRQh9goCNf1.H75FRdSiDfnX/L9JVTMU0GthjZCKuJi',
+      name: 'admin'
     }]);
   },
 

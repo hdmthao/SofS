@@ -1,14 +1,19 @@
 import { NotFoundError } from '../utils/errors/userFacingError';
-import { Product, ProductReview, SellerReview, User, Seller, sequelize } from '../models';
+import { Product, ProductReview, SellerReview, User, Seller, Category, sequelize } from '../models';
 import { logger } from '../config/winston';
 import { DatabaseError } from '../utils/errors/baseError';
+import moment from 'moment';
 
 export default class ProductService {
   static async getProducts(params) {
+    const query = {
+      status: true
+    };
+    if (params.sellerId) {
+      query.sellerId = params.sellerId;
+    }
     const products = await Product.findAll({
-      where: {
-        status: true
-      },
+      where: query,
       attributes: {
         include: [
           [sequelize.fn('COUNT', sequelize.col('productReviews.id')), 'numReviews'],
@@ -120,16 +125,49 @@ export default class ProductService {
     return product;
   }
 
-  static async createProduct(data) {
-    const product = await Product.create(data).catch((err) => {
+  static async createProduct(userId) {
+    const seller = await Seller.findOne({
+      where: {
+        userId
+      }
+    });
+    const sampleProduct = {
+      name: `Sample_${moment.now()}`,
+      sellerId: seller.id,
+      image: '/images/hai-tu.jpg',
+      brand: 'Default brand',
+      description: 'This is a product',
+      price: 1,
+      countInStock: 1
+    };
+    const product = await Product.create(sampleProduct).catch((err) => {
       logger.error(err);
       return null;
     });
 
     if (!product) {
-      throw new DatabaseError('Can not create product', 71);
+      throw new DatabaseError('Can not create product', "database_error");
     }
 
-    return product;
+    return {
+      product
+    };
+  }
+
+  static async updateProduct(prodId, newInfo) {
+    newInfo.categoryId = parseInt(newInfo.categoryId, 10);
+    delete newInfo.id;
+    return await Product.update(newInfo, {
+      where: {
+        id: prodId,
+      }
+    }).spread((affectedCount) => {
+      if (!affectedCount) {
+        throw new NotFoundError('Fail To Update Product', 'not_found');
+      }
+      return {
+        message: 'Updated'
+      };
+    });
   }
 }
