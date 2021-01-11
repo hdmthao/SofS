@@ -3,18 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signOut } from './actions/userActions';
 // import AdminRoute from './components/AdminRoute';
-// import PrivateRoute from './components/PrivateRoute';
-// import CartScreen from './screens/CartScreen';
+import PrivateRoute from './components/PrivateRoute';
+import CartScreen from './screens/CartScreen';
 import HomeScreen from './screens/HomeScreen';
 // import OrderHistoryScreen from './screens/OrderHistoryScreen';
 // import OrderScreen from './screens/OrderScreen';
-// import PaymentMethodScreen from './screens/PaymentMethodScreen';
-// import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import PaymentMethodScreen from './screens/PaymentMethodScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
 // import ProductListScreen from './screens/ProductListScreen';
 import ProductScreen from './screens/ProductScreen';
 // import ProfileScreen from './screens/ProfileScreen';
 import RegisterScreen from './screens/RegisterScreen';
-// import ShippingAddressScreen from './screens/ShippingAddressScreen';
+import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SignInScreen from './screens/SignInScreen';
 // import ProductEditScreen from './screens/ProductEditScreen';
 // import OrderListScreen from './screens/OrderListScreen';
@@ -27,12 +27,12 @@ import SearchScreen from './screens/SearchScreen';
 import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
-// import MapScreen from './screens/MapScreen';
+import MapScreen from './screens/MapScreen';
 
 function App() {
-  // const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  // const { cartItems } = cart;
+  const { cartItems } = cart;
   const userSignIn = useSelector((state) => state.userSignIn);
   const { userInfo } = userSignIn;
   const dispatch = useDispatch();
@@ -73,12 +73,12 @@ function App() {
             ></Route>
           </div>
           <div>
-            {/* <Link to="/cart">
+            <Link to="/carts">
               Cart
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
               )}
-            </Link> */}
+            </Link>
             {userInfo ? (
               <div className="dropdown">
                 <Link to="#">
@@ -171,8 +171,8 @@ function App() {
         </aside>
         <main>
           {/* <Route path="/seller/:id" component={SellerScreen}></Route> */}
-          {/* <Route path="/cart/:id?" component={CartScreen}></Route> */}
-          <Route path="/product/:id" component={ProductScreen} exact></Route>
+          <Route path="/carts/:id?" component={CartScreen}></Route>
+          <Route path="/products/:id" component={ProductScreen} exact></Route>
           {/* <Route
             path="/product/:id/edit"
             component={ProductEditScreen}
@@ -180,9 +180,9 @@ function App() {
           ></Route> */}
           <Route path="/sign-in" component={SignInScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
-          {/* <Route path="/shipping" component={ShippingAddressScreen}></Route> */}
-          {/* <Route path="/payment" component={PaymentMethodScreen}></Route> */}
-          {/* <Route path="/placeorder" component={PlaceOrderScreen}></Route> */}
+          <Route path="/shippings" component={ShippingAddressScreen}></Route>
+          <Route path="/payments" component={PaymentMethodScreen}></Route>
+          <Route path="/place-orders" component={PlaceOrderScreen}></Route>
           {/* <Route path="/order/:id" component={OrderScreen}></Route> */}
           {/* <Route path="/orderhistory" component={OrderHistoryScreen}></Route> */}
           <Route
@@ -209,7 +209,7 @@ function App() {
             path="/profile"
             component={ProfileScreen}
           ></PrivateRoute> */}
-          {/* <PrivateRoute path="/map" component={MapScreen}></PrivateRoute> */}
+          <PrivateRoute path="/map" component={MapScreen}></PrivateRoute>
           {/* <AdminRoute
             path="/productlist"
             component={ProductListScreen}

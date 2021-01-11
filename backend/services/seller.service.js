@@ -8,13 +8,14 @@ export default class SellerService {
       },
       attributes: {
         include: [
-          [sequelize.fn('COUNT', sequelize.col('SellerReviews.id')), 'numReviews'],
-          [sequelize.fn('SUM', sequelize.col('SellerReviews.rating')), 'rating']
+          [sequelize.fn('COUNT', sequelize.col('sellerReviews.id')), 'numReviews'],
+          [sequelize.fn('AVG', sequelize.col('sellerReviews.rating')), 'rating']
         ],
         exclude: ['status', 'createdAt', 'updatedAt']
       },
       include: [{
         attributes: [],
+        as: 'sellerReviews',
         model: SellerReview
       }],
       group: ['Seller.id'],

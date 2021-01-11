@@ -36,7 +36,7 @@ export default function ProductScreen(props) {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId, successReviewCreate]);
   const addToCartHandler = () => {
-    props.history.push(`/cart/${productId}?qty=${qty}`);
+    props.history.push(`/carts/${productId}?qty=${qty}`);
   };
   const submitHandler = (e) => {
     e.preventDefault();
@@ -153,11 +153,11 @@ export default function ProductScreen(props) {
           </div>
           <div>
             <h2 id="reviews">Reviews</h2>
-            {product.reviews.length === 0 && (
+            {product.productReviews.length === 0 && (
               <MessageBox>There is no review</MessageBox>
             )}
             <ul>
-              {product.reviews.map((review) => (
+              {product.productReviews.map((review) => (
                 <li key={review.id}>
                   <strong>{review.reviewer.name}</strong>
                   <Rating rating={review.rating} caption=" "></Rating>
@@ -211,7 +211,7 @@ export default function ProductScreen(props) {
                   </form>
                 ) : (
                   <MessageBox>
-                    Please <Link to="/signin">Sign In</Link> to write a review
+                    Please <Link to="/sign-in">Sign In</Link> to write a review
                   </MessageBox>
                 )}
               </li>

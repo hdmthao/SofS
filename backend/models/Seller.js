@@ -37,7 +37,8 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Seller.hasMany(models.SellerReview, {
-      foreignKey: 'sellerId'
+      foreignKey: 'sellerId',
+      as: 'sellerReviews'
     });
   };
 

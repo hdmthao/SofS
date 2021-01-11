@@ -8,17 +8,16 @@
 
 require("@babel/register");
 require("@babel/polyfill");
-require('dotenv').config();
+require('dotenv').config({ path: `${__dirname}/../.env` });
 
 const app = require('../app');
-const debug = require('debug')('express-sequelize');
 const http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3002');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**

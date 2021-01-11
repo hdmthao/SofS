@@ -39,8 +39,8 @@ app.use((req, res) => {
   res.status(404).send('Page not found');
 });
 
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
-);
+// app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
+// );
 
 // error handler
 // no stacktraces leaked to user unless in development environment

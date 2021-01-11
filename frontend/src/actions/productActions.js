@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import { BASE_URL } from '../constants/apiConstants' 
 import {
   PRODUCT_CREATE_FAIL,
   PRODUCT_CREATE_REQUEST,
@@ -22,6 +23,8 @@ import {
   PRODUCT_REVIEW_CREATE_SUCCESS,
   PRODUCT_REVIEW_CREATE_FAIL,
 } from '../constants/productConstants';
+
+Axios.defaults.baseURL = BASE_URL;
 
 export const listProducts = ({
   page = '',

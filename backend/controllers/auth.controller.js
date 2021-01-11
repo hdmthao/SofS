@@ -19,10 +19,12 @@ export default class AuthController {
         throw new BadRequestError('Email invalid', 'email_invalid');
       }
 
-      const signUpResponse = await AuthService.signUp(payload);
+      await AuthService.signUp(payload);
+      const signInResponse = await AuthService.signIn(payload);
+
       responseSuccess(res, {
         success: true,
-        ...signUpResponse
+        response: signInResponse
       });
     } catch (err) {
       logger.error(err);

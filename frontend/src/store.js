@@ -5,17 +5,17 @@ import {
   combineReducers,
 } from 'redux';
 import thunk from 'redux-thunk';
-// import { cartReducer } from './reducers/cartReducers';
+import { cartReducer } from './reducers/cartReducers';
 import {
-//   orderCreateReducer,
+  orderCreateReducer,
 //   orderDeleteReducer,
 //   orderDeliverReducer,
 //   orderDetailsReducer,
 //   orderListReducer,
 //   orderMineListReducer,
 //   orderPayReducer,
-// } from './reducers/orderReducers';
-// import {
+} from './reducers/orderReducers';
+import {
   productCategoryListReducer,
 //   productCreateReducer,
 //   productDeleteReducer,
@@ -25,7 +25,7 @@ import {
 //   productUpdateReducer,
 } from './reducers/productReducers';
 import {
-// userAddressMapReducer,
+userAddressMapReducer,
 // userDeleteReducer,
 // userDetailsReducer,
 // userListReducer,
@@ -55,10 +55,10 @@ const initialState = {
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
-//   cart: cartReducer,
+  cart: cartReducer,
   userSignIn: userSignInReducer,
   userRegister: userRegisterReducer,
-//   orderCreate: orderCreateReducer,
+  orderCreate: orderCreateReducer,
 //   orderDetails: orderDetailsReducer,
 //   orderPay: orderPayReducer,
 //   orderMineList: orderMineListReducer,
@@ -76,7 +76,7 @@ const reducer = combineReducers({
   userTopSellersList: userTopSellerListReducer,
   productCategoryList: productCategoryListReducer,
   productReviewCreate: productReviewCreateReducer,
-//   userAddressMap: userAddressMapReducer,
+  userAddressMap: userAddressMapReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

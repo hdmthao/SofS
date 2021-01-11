@@ -11,13 +11,14 @@ export default class ProductService {
       },
       attributes: {
         include: [
-          [sequelize.fn('COUNT', sequelize.col('ProductReviews.id')), 'numReviews'],
-          [sequelize.fn('AVG', sequelize.col('ProductReviews.rating')), 'rating']
+          [sequelize.fn('COUNT', sequelize.col('productReviews.id')), 'numReviews'],
+          [sequelize.fn('AVG', sequelize.col('productReviews.rating')), 'rating']
         ],
         exclude: ['createAt', 'updateAt']
       },
       include: [{
         model: ProductReview,
+        as: 'productReviews',
         attributes: []
       }],
       group: ['Product.id'],
@@ -42,21 +43,16 @@ export default class ProductService {
         model: Seller,
         as: 'seller',
         attributes: {
-          include: [
-            [sequelize.fn('COUNT', sequelize.col('SellerReviews.id')), 'numReviews'],
-            [sequelize.fn('SUM', sequelize.col('SellerReviews.rating')), 'rating']
-          ],
           exclude: ['status', 'createdAt', 'updatedAt']
         },
         include: [{
-          attributes: ['id', 'rating'],
+          attributes: ['id'],
+          as: 'sellerReviews',
           model: SellerReview
-        }],
-        group: ['seller.id'],
-        subQuery: false
+        }]
       }, {
         model: ProductReview,
-        as: 'reviews',
+        as: 'productReviews',
         attributes: {
           exclude: ['userId', 'updatedAt'],
         },
@@ -65,13 +61,61 @@ export default class ProductService {
           as: 'reviewer',
           attributes: ['id', 'name'],
         }],
-        raw: true
-      }]
+      }],
     });
 
     if (!product) {
       throw new NotFoundError('Product not found', 'not_found');
     }
+
+    const sellerRating = await Seller.findOne({
+      where: {
+        status: true,
+        id: product.sellerId
+      },
+      attributes: {
+        include: [
+          [sequelize.fn('COUNT', sequelize.col('sellerReviews.id')), 'numReviews'],
+          [sequelize.fn('AVG', sequelize.col('sellerReviews.rating')), 'rating']
+        ],
+        exclude: ['status', 'createdAt', 'updatedAt']
+      },
+      include: [{
+        attributes: [],
+        as: 'sellerReviews',
+        model: SellerReview
+      }],
+      group: ['Seller.id'],
+      subQuery: false,
+      raw: true
+    });
+
+    const productRating = await Product.findOne({
+      where: {
+        status: true,
+        id: params.prodId
+      },
+      attributes: {
+        include: [
+          [sequelize.fn('COUNT', sequelize.col('productReviews.id')), 'numReviews'],
+          [sequelize.fn('AVG', sequelize.col('productReviews.rating')), 'rating']
+        ],
+        exclude: ['status', 'createdAt', 'updatedAt']
+      },
+      include: [{
+        attributes: [],
+        as: 'productReviews',
+        model: ProductReview
+      }],
+      group: ['Product.id'],
+      subQuery: false,
+      raw: true
+    });
+
+    product.dataValues.seller.dataValues.numReviews = sellerRating.numReviews;
+    product.dataValues.seller.dataValues.rating = sellerRating.rating;
+    product.dataValues.numReviews = productRating.numReviews;
+    product.dataValues.rating = productRating.rating;
 
     return product;
   }
