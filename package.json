@@ -2,6 +2,7 @@
   "name": "sofs",
   "version": "1.0.0",
   "dependencies": {
+    "@agney/react-loading": "^0.1.2",
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",

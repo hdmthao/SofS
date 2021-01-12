@@ -51,7 +51,7 @@ export default function ProductScreen(props) {
   return (
     <div>
       {loading ? (
-        <LoadingBox></LoadingBox>
+        <div className="px-4"><LoadingBox></LoadingBox></div>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
@@ -201,7 +201,7 @@ export default function ProductScreen(props) {
                       </button>
                     </div>
                     <div>
-                      {loadingReviewCreate && <LoadingBox></LoadingBox>}
+                      {loadingReviewCreate && <div className="px-4"><LoadingBox></LoadingBox></div>}
                       {errorReviewCreate && (
                         <MessageBox variant="danger">
                           {errorReviewCreate}

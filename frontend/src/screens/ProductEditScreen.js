@@ -91,10 +91,10 @@ export default function ProductEditScreen(props) {
         <div>
           <h1>Edit Product {productId}</h1>
         </div>
-        {loadingUpdate && <LoadingBox></LoadingBox>}
+        {loadingUpdate && <div className="px-4"><LoadingBox></LoadingBox></div>}
         {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
         {loading ? (
-          <LoadingBox></LoadingBox>
+          <div className="px-4"><LoadingBox></LoadingBox></div>
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
@@ -137,7 +137,7 @@ export default function ProductEditScreen(props) {
                 label="Choose Image"
                 onChange={uploadFileHandler}
               ></input>
-              {loadingUpload && <LoadingBox></LoadingBox>}
+              {loadingUpload && <div className="px-4"><LoadingBox></LoadingBox></div>}
               {errorUpload && (
                 <MessageBox variant="danger">{errorUpload}</MessageBox>
               )}

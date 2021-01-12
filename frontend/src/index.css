@@ -272,6 +272,7 @@ img.large {
 /* Alert */
 .loading {
   display: block !important;
+  background-position: center;
 }
 .success {
   color: #20a020;
@@ -488,6 +489,9 @@ input::placeholder {
 }
 .px-3 {
   padding-right: 16px!important;
+}
+.px-4 {
+  margin: auto;
 }
 
 /* Map */

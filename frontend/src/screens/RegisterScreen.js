@@ -36,7 +36,7 @@ export default function RegisterScreen(props) {
     <div>
       <h1>Create Account</h1>
       <form className="form auth-form-body mt-3 rounded-3" onSubmit={submitHandler}>
-        {loading && <LoadingBox></LoadingBox>}
+        {loading && <div className="px-4"><LoadingBox></LoadingBox></div>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
           <label htmlFor="name">Name</label>

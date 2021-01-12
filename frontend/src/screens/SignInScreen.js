@@ -33,8 +33,10 @@ export default function SignInScreen(props) {
     <div className="auth-form px-3">
       <h1>Sign In</h1>
       <form className="form auth-form-body mt-3 rounded-3" onSubmit={submitHandler}>
-        {loading && <LoadingBox />}
-        {error && <MessageBox variant="danger">{error}</MessageBox>}
+        <div className="px-4">
+          {loading && <div className="px-4"><LoadingBox /></div>}
+          {error && <MessageBox variant="danger">{error}</MessageBox>}
+        </div>
         <div>
           <label htmlFor="email">Email address</label>
           <input

@@ -28,7 +28,7 @@ export default function HomeScreen() {
     <div>
       <h2>Top Sellers</h2>
       {loadingSellers ? (
-        <LoadingBox></LoadingBox>
+          <LoadingBox/>
       ) : errorSellers ? (
         <MessageBox variant="danger">{errorSellers}</MessageBox>
       ) : (
@@ -48,7 +48,9 @@ export default function HomeScreen() {
       )}
       <h2>Featured Products</h2>
       {loading ? (
-        <LoadingBox></LoadingBox>
+        <div className="px-4">
+          <LoadingBox />
+        </div>  
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (

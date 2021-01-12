@@ -58,7 +58,7 @@ export default function SearchScreen(props) {
     <div>
       <div className="row">
         {loading ? (
-          <LoadingBox></LoadingBox>
+          <div className="px-4"><LoadingBox></LoadingBox></div>
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
@@ -84,7 +84,7 @@ export default function SearchScreen(props) {
           <h3>Department</h3>
           <div>
             {loadingCategories ? (
-              <LoadingBox></LoadingBox>
+              <div className="px-4"><LoadingBox></LoadingBox></div>
             ) : errorCategories ? (
               <MessageBox variant="danger">{errorCategories}</MessageBox>
             ) : (
@@ -145,7 +145,7 @@ export default function SearchScreen(props) {
         </div>
         <div className="col-3">
           {loading ? (
-            <LoadingBox></LoadingBox>
+            <div className="px-4"><LoadingBox></LoadingBox></div>
           ) : error ? (
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
